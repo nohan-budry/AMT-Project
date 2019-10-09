@@ -6,7 +6,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>QuoteServlet</servlet-name>
-    <servlet-class>ch.heigvd.amt.mvcsimple.presentation.QuoteServlet</servlet-class>
+    <servlet-class>ch.heigvd.amt.project.presentation.QuoteServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>QuoteServlet</servlet-name>

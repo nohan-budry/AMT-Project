@@ -1,7 +1,7 @@
-package ch.heigvd.amt.mvcsimple.presentation;
+package ch.heigvd.amt.project.presentation;
 
-import ch.heigvd.amt.mvcsimple.business.QuoteGenerator;
-import ch.heigvd.amt.mvcsimple.model.Quote;
+import ch.heigvd.amt.project.business.QuoteGenerator;
+import ch.heigvd.amt.project.model.Quote;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
