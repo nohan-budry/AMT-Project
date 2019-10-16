@@ -14,8 +14,6 @@ services:
     build: ../images/mysql
     environment:
      - MYSQL_ROOT_PASSWORD=adminadmin
-    ports:
-     - "7070:7070"
 
   phpmyadmin:
     build: ../images/phpmyadmin
