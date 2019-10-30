@@ -4,12 +4,16 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
+
   <servlet>
-    <servlet-name>QuoteServlet</servlet-name>
-    <servlet-class>ch.heigvd.amt.project.presentation.QuoteServlet</servlet-class>
+  <servlet-name>TestServlet</servlet-name>
+  <servlet-class>ch.heigvd.amt.project.presentation.TestServlet</servlet-class>
   </servlet>
+
+
   <servlet-mapping>
-    <servlet-name>QuoteServlet</servlet-name>
-    <url-pattern>/quotes</url-pattern>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/farmer</url-pattern>
   </servlet-mapping>
+
 </web-app>
