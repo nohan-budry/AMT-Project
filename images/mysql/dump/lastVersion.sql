@@ -18,30 +18,32 @@ USE `amt_project`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `explotationRights`
+-- Table structure for table `exploitationRights`
 --
 
-DROP TABLE IF EXISTS `explotationRights`;
+DROP TABLE IF EXISTS `exploitationRights`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `explotationRights` (
-  `idexplotationRights` int(11) NOT NULL,
+CREATE TABLE `exploitationRights` (
   `issueDate` varchar(45) DEFAULT NULL,
   `monthlyFee` varchar(45) DEFAULT NULL,
   `duration` varchar(45) DEFAULT NULL,
-  KEY `fk_field` (`idexplotationRights`),
-  CONSTRAINT `fk_farmer` FOREIGN KEY (`idexplotationRights`) REFERENCES `farmers` (`idfarmer`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_field` FOREIGN KEY (`idexplotationRights`) REFERENCES `fields` (`idfield`) ON DELETE CASCADE
+  `idField` int(11) NOT NULL,
+  `idFarmer` int(11) NOT NULL,
+  PRIMARY KEY (`idField`,`idFarmer`),
+  KEY `fk_farmer_idx` (`idFarmer`),
+  CONSTRAINT `fk_farmer` FOREIGN KEY (`idFarmer`) REFERENCES `farmers` (`idfarmer`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_fields` FOREIGN KEY (`idField`) REFERENCES `fields` (`idfield`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `explotationRights`
+-- Dumping data for table `exploitationRights`
 --
 
-LOCK TABLES `explotationRights` WRITE;
-/*!40000 ALTER TABLE `explotationRights` DISABLE KEYS */;
-/*!40000 ALTER TABLE `explotationRights` ENABLE KEYS */;
+LOCK TABLES `exploitationRights` WRITE;
+/*!40000 ALTER TABLE `exploitationRights` DISABLE KEYS */;
+/*!40000 ALTER TABLE `exploitationRights` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -59,7 +61,7 @@ CREATE TABLE `farmers` (
   `address` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`username`),
+  PRIMARY KEY (`idFarmer`),
   UNIQUE KEY `id_UNIQUE` (`idFarmer`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `farmerscol_UNIQUE` (`username`)
@@ -110,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-04 11:36:21
+-- Dump completed on 2019-11-04 13:51:18
