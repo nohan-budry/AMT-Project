@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 public class Farmer {
 
+    private int idFarmer;
     private String username;
     private String firstName;
     private String lastName;

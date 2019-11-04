@@ -87,8 +87,8 @@ public class FarmersManager implements FarmersManagerLocal {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT username, firstName, lastName,address ,email FROM farmers WHERE username = ?");
-            statement.setString(1,id);
+            PreparedStatement statement = con.prepareStatement("SELECT username, firstName, lastName,address ,email FROM farmers WHERE idFarmer = ?");
+            statement.setInt(1, Integer.parseInt(id));
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
             if (!hasRecord) {
@@ -115,11 +115,12 @@ public class FarmersManager implements FarmersManagerLocal {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("UPDATE farmers SET firstName=?, lastName=?, address=?, email=? WHERE username = ?");
+            PreparedStatement statement = con.prepareStatement("UPDATE farmers SET firstName=?, lastName=?, address=?, email=? WHERE idFarmer = ?");
             statement.setString(1, entity.getFirstName());
             statement.setString(2, entity.getLastName());
-            statement.setString(3, entity.getEmail());
-            statement.setString(4, entity.getUsername());
+            statement.setString(3, entity.getAddress());
+            statement.setString(4, entity.getEmail());
+            statement.setInt(5, entity.getIdFarmer());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
                 throw new KeyNotFoundException("Could not find user with username = " + entity.getUsername());
@@ -138,8 +139,8 @@ public class FarmersManager implements FarmersManagerLocal {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("DELETE FROM farmers WHERE username = ?");
-            statement.setString(1, id);
+            PreparedStatement statement = con.prepareStatement("DELETE FROM farmers WHERE idFarmer = ?");
+            statement.setInt(1, Integer.parseInt(id));
             int numberOfDeletedUsers = statement.executeUpdate();
             if (numberOfDeletedUsers != 1) {
                 throw new KeyNotFoundException("Could not find user with username = " + id);

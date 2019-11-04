@@ -1,13 +1,10 @@
 package ch.heigvd.amt.project.services;
 
-import ch.heigvd.amt.project.authentification.IAuthenticationService;
 import ch.heigvd.amt.project.datastore.exceptions.DuplicateKeyException;
 import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
-import ch.heigvd.amt.project.model.Farmer;
 import ch.heigvd.amt.project.model.Field;
 
 import javax.annotation.Resource;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -25,8 +22,6 @@ public class FieldManager implements FieldManagerLocal {
     @Resource(lookup = "jdbc/amt_project")
     DataSource dataSource;
 
-    @EJB
-    IAuthenticationService authenticationService;
 
     @Override
     public List<Field> findAll() {
@@ -41,7 +36,7 @@ public class FieldManager implements FieldManagerLocal {
             while (rs.next()) {
 
                 fields.add(Field.builder()
-                        .idField(rs.getLong("idField"))
+                        .idField(rs.getInt("idField"))
                         .size((int) rs.getLong("size"))
                         .build());
 

@@ -6,6 +6,6 @@ import lombok.*;
 @EqualsAndHashCode
 @Getter
 public class Field {
-    private long idField;
+    private int idField;
     private int size;
 }
