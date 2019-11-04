@@ -14,12 +14,10 @@ public class TestServlet extends javax.servlet.http.HttpServlet {
     @EJB
     private FarmersManagerLocal farmersManager;
 
-
-
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setAttribute("farmers",farmersManager.findAllFarmers());
+        request.setAttribute("farmers",farmersManager.findAll());
         request.getRequestDispatcher("/WEB-INF/pages/farmer.jsp").forward(request, response);
 
     }
