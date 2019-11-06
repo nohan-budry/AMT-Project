@@ -83,6 +83,33 @@ public class FarmersManager implements FarmersManagerLocal {
     }
 
     @Override
+    public Farmer findByUser(String id) throws KeyNotFoundException {
+        Connection con = null;
+        try {
+            con = dataSource.getConnection();
+            PreparedStatement statement = con.prepareStatement("SELECT username, firstName, lastName,address ,email FROM farmers WHERE username = ?");
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            boolean hasRecord = rs.next();
+            if (!hasRecord) {
+                throw new KeyNotFoundException("Could not find user with username = " + id);
+            }
+            Farmer existingUser = Farmer.builder()
+                    .username(rs.getString(1))
+                    .firstName(rs.getString(2))
+                    .lastName(rs.getString(3))
+                    .email(rs.getString(4))
+                    .build();
+            return existingUser;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Error(e);
+        } finally {
+            closeConnection(con);
+        }
+    }
+
+    @Override
     public Farmer findById(String id) throws KeyNotFoundException {
         Connection con = null;
         try {
@@ -92,7 +119,7 @@ public class FarmersManager implements FarmersManagerLocal {
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
             if (!hasRecord) {
-                throw new KeyNotFoundException("Could not find user with username = " + id);
+                throw new KeyNotFoundException("Could not find  = " + id);
             }
             Farmer existingUser = Farmer.builder()
                     .username(rs.getString(1))

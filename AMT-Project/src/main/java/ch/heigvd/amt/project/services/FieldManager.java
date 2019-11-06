@@ -69,6 +69,11 @@ public class FieldManager implements FieldManagerLocal {
     }
 
     @Override
+    public Field findByUser(String id) throws KeyNotFoundException {
+        return null;
+    }
+
+    @Override
     public Field findById(String id) throws KeyNotFoundException {
         Connection con = null;
         try {
