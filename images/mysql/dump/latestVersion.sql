@@ -60,12 +60,12 @@ CREATE TABLE `farmers` (
   `lastName` varchar(45) NOT NULL,
   `address` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `password` varchar(1000) NOT NULL,
   PRIMARY KEY (`idFarmer`),
   UNIQUE KEY `id_UNIQUE` (`idFarmer`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `farmerscol_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `farmers` (
 
 LOCK TABLES `farmers` WRITE;
 /*!40000 ALTER TABLE `farmers` DISABLE KEYS */;
-INSERT INTO `farmers` VALUES (1,'andy','andy','moreno','aaaa','aaaa','aaaaaaa');
+INSERT INTO `farmers` VALUES (1,'andy','andy','moreno','aaaa','aaaa','aaaaaaa'),(8,'thisisatest','robert','ple','bob','@totototo','$2a$10$pq./nTkYZNR9DHDspPJ/RebOQHm/PXipNCklQjtp1BmMCas2Hdwm.');
 /*!40000 ALTER TABLE `farmers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-04 13:51:18
+-- Dump completed on 2019-11-06 14:49:25

@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="../assets/paper_img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	
-	<title>Paper Kit by Creative Tim</title>
+	<title>Farmer profile</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -34,23 +34,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="www.creative-tim.com">Creative Tim</a>
+
         </div>
     
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navigation-example-2">
           <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="#" class="btn btn-simple">Components</a>
-            </li>
-            <li>
-                <a href="#" class="btn btn-simple">Tutorial</a>
-            </li>
-            <li>
-                <a href="#" target="_blank" class="btn btn-simple"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li>
-                <a href="#" target="_blank" class="btn btn-simple"><i class="fa fa-facebook"></i></a>
+                <a href="#" class="btn btn-simple">Manage Fields</a>
             </li>
            </ul>
         </div><!-- /.navbar-collapse -->
@@ -66,82 +57,89 @@
                 <div class="row owner">
                     <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 text-center">
                         <div class="avatar">
-                            <img src="./assets/paper_img/chet_faker_2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                            <img src="./assets/paper_img/potatoAvatar.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                         </div>
                         <div class="name">
-                            <h4>Chet Faker<br /><small>Music Producer</small></h4>
+
+                            <h4 items="${farmer}" var="farmer">${farmer.username}
+                                <br />
+                                <small>${farmer.firstName} ${farmer.lastName}</small>
+                            </h4>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" items="${farmer}" var="farmer">
                     <div class="col-md-6 col-md-offset-3 text-center">
-                        <p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. </p>
+                        <p>Email: ${farmer.email}
+                        <br />
+                            Address: ${farmer.address}
+                        </p>
                         <br />
                         <btn class="btn"><i class="fa fa-cog"></i> Settings</btn>
                     </div>
                 </div>
-                <div class="profile-tabs">
-                    <div class="nav-tabs-navigation">
-                        <div class="nav-tabs-wrapper">
-                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
-                                <li class="active"><a href="#follows" data-toggle="tab">Follows</a></li>
-                                <li><a href="#following" data-toggle="tab">Following</a></li>
-<!--                                 <li><a href="#following" data-toggle="tab">Following</a></li> -->
-                            </ul>
-                        </div>
-                    </div>
-                    <div id="my-tab-content" class="tab-content">
-                        <div class="tab-pane active" id="follows">
-                            <div class="row">
-                                <div class="col-md-6 col-md-offset-3">
-                                    <ul class="list-unstyled follows">
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
-                                                    <img src="./assets/paper_img/flume.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                </div>
-                                                <div class="col-md-7 col-xs-4">
-                                                    <h6>Flume<br /><small>Musical Producer</small></h6>
-                                                </div>
-                                                <div class="col-md-3 col-xs-2">
-                                                    <div class="unfollow" rel="tooltip" title="Unfollow">
-                                                        <label class="checkbox" for="checkbox1" >
-                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <hr />
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">
-                                                    <img src="./assets/paper_img/banks.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                                </div>
-                                                <div class="col-md-7 col-xs-4">
-                                                    <h6>Banks<br /><small>Singer</small></h6>
-                                                </div>
-                                                <div class="col-md-3 col-xs-2">
-                                                    <div class="unfollow" rel="tooltip" title="Unfollow">
-                                                        <label class="checkbox" for="checkbox1" >
-                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane text-center" id="following">
-                            <h3 class="text-muted">Not following anyone yet :(</h3>
-                            <btn class="btn btn-warning btn-fill">Find artists</btn>
-                        </div>
-                    </div>
-                    
-                </div>        
-            </div>
+<%--                <div class="profile-tabs">--%>
+<%--                    <div class="nav-tabs-navigation">--%>
+<%--                        <div class="nav-tabs-wrapper">--%>
+<%--                            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">--%>
+<%--                                <li class="active"><a href="#follows" data-toggle="tab">Follows</a></li>--%>
+<%--                                <li><a href="#following" data-toggle="tab">Following</a></li>--%>
+<%--<!--                                 <li><a href="#following" data-toggle="tab">Following</a></li> -->--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div id="my-tab-content" class="tab-content">--%>
+<%--                        <div class="tab-pane active" id="follows">--%>
+<%--                            <div class="row">--%>
+<%--                                <div class="col-md-6 col-md-offset-3">--%>
+<%--                                    <ul class="list-unstyled follows">--%>
+<%--                                        <li>--%>
+<%--                                            <div class="row">--%>
+<%--                                                <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">--%>
+<%--                                                    <img src="./assets/paper_img/flume.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-md-7 col-xs-4">--%>
+<%--                                                    <h6>Flume<br /><small>Musical Producer</small></h6>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-md-3 col-xs-2">--%>
+<%--                                                    <div class="unfollow" rel="tooltip" title="Unfollow">--%>
+<%--                                                        <label class="checkbox" for="checkbox1" >--%>
+<%--                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>--%>
+<%--                                                        </label>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </li>--%>
+<%--                                        <hr />--%>
+<%--                                        <li>--%>
+<%--                                            <div class="row">--%>
+<%--                                                <div class="col-md-2 col-md-offset-0 col-xs-3 col-xs-offset-2">--%>
+<%--                                                    <img src="./assets/paper_img/banks.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-md-7 col-xs-4">--%>
+<%--                                                    <h6>Banks<br /><small>Singer</small></h6>--%>
+<%--                                                </div>--%>
+<%--                                                <div class="col-md-3 col-xs-2">--%>
+<%--                                                    <div class="unfollow" rel="tooltip" title="Unfollow">--%>
+<%--                                                        <label class="checkbox" for="checkbox1" >--%>
+<%--                                                            <input type="checkbox" value="" id="checkbox1" data-toggle="checkbox" checked>--%>
+<%--                                                        </label>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </li>--%>
+<%--                                    </ul>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                        <div class="tab-pane text-center" id="following">--%>
+<%--                            <h3 class="text-muted">Not following anyone yet :(</h3>--%>
+<%--                            <btn class="btn btn-warning btn-fill">Find artists</btn>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    --%>
+<%--                </div>        --%>
+<%--            </div>--%>
         </div>
     </div> 
     <footer class="footer-demo section-nude">
