@@ -27,7 +27,7 @@ public class ProfileServlet extends HttpServlet {
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     HttpSession session=req.getSession();
     Farmer farmer=(Farmer)session.getAttribute("farmer");
-
+   //TODO: eliminar el builder
       farmer=Farmer.builder()
               .username("thisisatest")
               .firstName("robert")
