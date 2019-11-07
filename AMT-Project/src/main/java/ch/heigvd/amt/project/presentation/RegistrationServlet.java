@@ -11,8 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.NotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -26,9 +26,6 @@ public class RegistrationServlet extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    Logger.getLogger("POTATO").info("NULL!");
-
     req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
   }
 
@@ -59,10 +56,9 @@ public class RegistrationServlet extends HttpServlet {
     }
     if (!checkRequired(password)) {
       errors.put("password", "Password is required!");
-
-      if (!checkPasswords(password, confirm)) {
-        errors.put("confirm", "Passwords do not match!");
-      }
+    }
+    if (!checkPasswords(password, confirm)) {
+      errors.put("confirm", "Passwords do not match!");
     }
 
     Farmer farmer = null;
@@ -77,8 +73,8 @@ public class RegistrationServlet extends HttpServlet {
                 .password(password)
                 .build()
         );
-      } catch (DuplicateKeyException e) {
-        errors.put("other", "Username or E-Mail already used! " + e.getMessage());
+      } catch (SQLException e) {
+        errors.put("other", "Registration failed!");
       }
     }
 
@@ -93,7 +89,8 @@ public class RegistrationServlet extends HttpServlet {
     try {
       farmer = farmersManager.findByUser(username);
     } catch (KeyNotFoundException e) {
-      resp.sendRedirect("/login");
+      resp.sendRedirect(req.getContextPath() + "/login");
+      return;
     }
 
     req.getSession().setAttribute("farmer", farmer);

@@ -68,10 +68,10 @@
                             <input type="text" class="form-control" name="email"
                                    placeholder="E-Mail" value="${param.email}">
                             <label>Address</label>
-                            <input type="text" class="form-control" name="address"
+                            <input type="password" class="form-control" name="address"
                                    placeholder="Address" value="${param.address}">
                             <label>Password</label>
-                            <input type="text" class="form-control" name="password" placeholder="Password">
+                            <input type="password" class="form-control" name="password" placeholder="Password">
                             <label>Confirm Password</label>
                             <input type="text" class="form-control" name="confirm" placeholder="Confirm Password">
                             <button type="submit" name="register" class="btn btn-danger btn-block">Register</button>

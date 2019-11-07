@@ -1,11 +1,12 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
-    <link rel="icon" type="image/png" href="../assets/paper_img/favicon.ico">
+    <link rel="icon" type="image/png" href="./assets/paper_img/favicon.ico">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 
-    <title>Farmer profile</title>
+    <title>Register</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="viewport" content="width=device-width"/>
@@ -24,7 +25,7 @@
 
 </head>
 <body>
-<nav class="navbar navbar-ct-transparent navbar-relative " role="navigation-demo" id="register-navbar">
+<nav class="navbar navbar-ct-transparent navbar-fixed-top" role="navigation-demo" id="register-navbar">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -34,66 +35,52 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
+            <a class="navbar-brand" href="www.heig-vd.ch">HEIG-VD Super Notes</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navigation-example-2">
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" class="btn btn-simple">Manage Fields</a>
-                </li>
-                <li>
-                    <a href="logout" class="btn btn-simple">Sing Out</a>
-                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-->
 </nav>
 
 <div class="wrapper">
-    <div class="profile-background">
+    <div class="register-background">
         <div class="filter-black"></div>
-    </div>
-    <div class="profile-content section-nude">
         <div class="container">
-            <div class="row owner">
-                <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 text-center">
-                    <div class="avatar">
-                        <img src="./assets/paper_img/potatoAvatar.jpg" alt="Circle Image"
-                             class="img-circle img-no-padding img-responsive">
-                    </div>
-                    <div class="name">
-
-                        <h4 items="${farmer}" var="farmer">${farmer.username}
-                            <br/>
-                            <small>${farmer.firstName} ${farmer.lastName}</small>
-                        </h4>
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+                    <div class="register-card">
+                        <h3 class="title">Welcome</h3>
+                        <form action="login" method="post" class="register-form">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username"
+                                   placeholder="Username" value="${param.username}">
+                            <label>Password</label>
+                            <input type="password" class="form-control" name="password" placeholder="Password">
+                            <button type="submit" name="register" class="btn btn-danger btn-block">Register</button>
+                        </form>
+                        <ul>
+                            <c:forEach items="${errors}" var="error">
+                                <li style="color: red;">${error.value}</li>
+                            </c:forEach>
+                        </ul>
+                        <!--
+                          <div class="forgot">
+                              <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
+                          </div>
+                          -->
                     </div>
                 </div>
             </div>
-            <div class="row" items="${farmer}" var="farmer">
-                <div class="col-md-6 col-md-offset-3 text-center">
-                    <p>Email: ${farmer.email}
-                        <br/>
-                        Address: ${farmer.address}
-                    </p>
-                    <br/>
-                    <btn class="btn"><i class="fa fa-cog"></i> Settings</btn>
-                </div>
-            </div>
+        </div>
+        <div class="footer register-footer text-center">
+            <h6>&copy; 2019, Amt Project</h6>
         </div>
     </div>
-    <footer class="footer-demo section-nude">
-        <div class="container">
-            <nav class="pull-left">
-
-                </ul>
-            </nav>
-            <div class="copyright pull-right">&copy; 2019, AMT PROJECT</div>
-        </div>
-    </footer>
-
+</div>
 
 </body>
 
