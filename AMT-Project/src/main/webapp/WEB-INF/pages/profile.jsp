@@ -96,7 +96,7 @@
         </div>
     </footer>
 
-
+</div>>
 </body>
 
 <script src="./assets/js/jquery-1.10.2.js" type="text/javascript"></script>
