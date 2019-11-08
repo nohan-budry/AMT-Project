@@ -52,7 +52,7 @@ public class FieldManager implements FieldManagerLocal {
     }
 
     @Override
-    public Field create(Field entity) throws DuplicateKeyException {
+    public Field create(Field entity) throws SQLException {
         Connection con = null;
         try {
             con = dataSource.getConnection();
@@ -60,17 +60,9 @@ public class FieldManager implements FieldManagerLocal {
             statement.setLong(1, entity.getSize());
             statement.execute();
             return entity;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new Error(e);
         } finally {
             closeConnection(con);
         }
-    }
-
-    @Override
-    public Field findByUser(String id) throws KeyNotFoundException {
-        return null;
     }
 
     @Override
