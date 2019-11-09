@@ -20,30 +20,30 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class LoginServletTest {
+class LoginServletTest {
 
     @Mock
-    HttpServletRequest request;
+    private HttpServletRequest request;
 
     @Mock
-    HttpServletResponse response;
+    private HttpServletResponse response;
 
     @Mock
-    RequestDispatcher requestDispatcher;
+    private RequestDispatcher requestDispatcher;
 
     @Mock
-    FarmersManagerLocal farmersManager;
+    private FarmersManagerLocal farmersManager;
 
     @Mock
-    HttpSession session;
+    private HttpSession session;
 
-    LoginServlet servlet;
+    private LoginServlet servlet;
 
     @Captor
-    ArgumentCaptor<Map<String, String>> argumentCaptor;
+    private ArgumentCaptor<Map<String, String>> argumentCaptor;
 
     @BeforeEach
-    public void setUp() throws NoSuchFieldException {
+    void setUp() throws NoSuchFieldException {
         MockitoAnnotations.initMocks(this);
 
         servlet = new LoginServlet();
@@ -78,9 +78,9 @@ public class LoginServletTest {
         Assert.assertFalse(argumentCaptor.getValue().containsKey("password"));
         Assert.assertFalse(argumentCaptor.getValue().containsKey("login"));
 
-        verify(request).getRequestDispatcher(ArgumentMatchers.contains("login"));
+        verify(request).getRequestDispatcher(ArgumentMatchers.contains("login.jsp"));
         verify(requestDispatcher).forward(request, response);
-        verify(farmersManager, never()).create(any());
+        verify(farmersManager, never()).login(anyString(), anyString());
     }
 
     @Test
@@ -142,7 +142,7 @@ public class LoginServletTest {
 
         verify(request).getParameter("username");
         verify(request).getParameter("password");
-        verify(request, never()).setAttribute(any(), any());
+        verify(request, never()).setAttribute(eq("errors"), any());
 
         verify(farmersManager).login(farmer.getUsername(), farmer.getPassword());
 

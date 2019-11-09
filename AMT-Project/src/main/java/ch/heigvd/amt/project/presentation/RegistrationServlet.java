@@ -94,7 +94,7 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     req.getSession().setAttribute("farmer", farmer);
-    req.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(req, resp);
+    resp.sendRedirect(req.getContextPath() + "/profile");
   }
 
   private boolean checkRequired(String str) {
