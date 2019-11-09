@@ -1,7 +1,6 @@
 package ch.heigvd.amt.project.services;
 
-import ch.heigvd.amt.project.authentification.IAuthenticationService;
-import ch.heigvd.amt.project.datastore.exceptions.DuplicateKeyException;
+import ch.heigvd.amt.project.authentication.IAuthenticationService;
 import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.project.model.Farmer;
 

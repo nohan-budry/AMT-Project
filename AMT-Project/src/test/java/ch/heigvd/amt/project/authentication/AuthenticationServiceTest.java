@@ -1,6 +1,5 @@
-package ch.heigvd.amt.notes.business;
+package ch.heigvd.amt.project.authentication;
 
-import ch.heigvd.amt.project.authentification.IAuthenticationService;
 import org.arquillian.container.chameleon.deployment.maven.MavenBuild;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;

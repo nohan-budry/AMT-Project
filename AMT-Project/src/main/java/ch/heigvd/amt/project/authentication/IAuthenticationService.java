@@ -1,4 +1,4 @@
-package ch.heigvd.amt.project.authentification;
+package ch.heigvd.amt.project.authentication;
 
 import javax.ejb.Local;
 
