@@ -61,6 +61,7 @@ CREATE TABLE `farmers` (
   `address` varchar(45) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `password` varchar(1000) NOT NULL,
+  `admin` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`idFarmer`),
   UNIQUE KEY `id_UNIQUE` (`idFarmer`),
   UNIQUE KEY `email_UNIQUE` (`email`),
@@ -74,7 +75,7 @@ CREATE TABLE `farmers` (
 
 LOCK TABLES `farmers` WRITE;
 /*!40000 ALTER TABLE `farmers` DISABLE KEYS */;
-INSERT INTO `farmers` VALUES (1,'andy','andy','moreno','aaaa','aaaa','aaaaaaa'),(8,'thisisatest','robert','ple','bob','@totototo','$2a$10$pq./nTkYZNR9DHDspPJ/RebOQHm/PXipNCklQjtp1BmMCas2Hdwm.');
+INSERT INTO `farmers` VALUES (1,'andy','andy','moreno','aaaa','aaaa','aaaaaaa',NULL),(2,'jack','jack','Eri','potatoland','toto@gmailss.com','123',1);
 /*!40000 ALTER TABLE `farmers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-06 14:49:25
+-- Dump completed on 2019-11-09 10:57:00
