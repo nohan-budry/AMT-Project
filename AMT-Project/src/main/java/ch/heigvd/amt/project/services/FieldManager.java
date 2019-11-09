@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,42 @@ public class FieldManager implements FieldManagerLocal {
     @Resource(lookup = "jdbc/amt_project")
     DataSource dataSource;
 
+    @Override
+    public List<Field> findAll(int amount, int page) throws SQLException {
+        List<Field> fields = new LinkedList<>();
+
+        if (amount > 0 && page > 0) {
+
+            Connection connection = null;
+            try {
+                connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT * FROM fields LIMIT ?, ?"
+                );
+
+                statement.setInt(1, amount * (page - 1)); // offset
+                statement.setInt(2, amount);
+
+                ResultSet results = statement.executeQuery();
+                while (results.next()) {
+                    fields.add(Field.builder()
+                            .idField(results.getInt("idField"))
+                            .size(results.getInt("size"))
+                            .build()
+                    );
+                }
+
+            } catch (SQLException sqlException) {
+                fields.clear();
+            } finally {
+                if (connection != null) {
+                    connection.close();
+                }
+            }
+        }
+
+        return fields;
+    }
 
     @Override
     public List<Field> findAll() {
@@ -97,6 +134,7 @@ public class FieldManager implements FieldManagerLocal {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement("UPDATE fields SET size=? WHERE idField = ?");
             statement.setLong(1, entity.getSize());
+            statement.setLong(2, entity.getIdField());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
                 throw new KeyNotFoundException("Could not find  field = " + entity.getIdField());
@@ -115,7 +153,7 @@ public class FieldManager implements FieldManagerLocal {
         Connection con = null;
         try {
             con = dataSource.getConnection();
-            PreparedStatement statement = con.prepareStatement("DELETE FROM field WHERE idField = ?");
+            PreparedStatement statement = con.prepareStatement("DELETE FROM fields WHERE idField = ?");
             statement.setLong(1, Long.parseLong(id));
             int numberOfDeletedUsers = statement.executeUpdate();
             if (numberOfDeletedUsers != 1) {

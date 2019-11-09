@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navigation-example-2">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" class="btn btn-simple">Manage Fields</a>
+                    <a href="fields" class="btn btn-simple">Manage Fields</a>
                 </li>
                 <li>
                     <a href="logout" class="btn btn-simple">Sing Out</a>
