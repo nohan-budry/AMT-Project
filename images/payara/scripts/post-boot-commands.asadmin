@@ -4,4 +4,3 @@ create-jdbc-connection-pool --restype javax.sql.DataSource --datasourceclassname
 
 create-jdbc-resource --connectionpoolid amt_project jdbc/amt_project
 
-deploy /opt/payara/deployments/AMT-Project.war
