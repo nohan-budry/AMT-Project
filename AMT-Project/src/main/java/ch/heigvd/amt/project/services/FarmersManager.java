@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//TODO: Set admin where needed
+
 @Stateless
 public class FarmersManager implements FarmersManagerLocal {
 

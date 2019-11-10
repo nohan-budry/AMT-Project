@@ -15,7 +15,7 @@ public class Farmer {
     private String address;
     private String email;
     private String password;
-
+    private boolean admin;
 
 }
 
