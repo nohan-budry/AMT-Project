@@ -25,16 +25,16 @@ DROP TABLE IF EXISTS `exploitationRights`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `exploitationRights` (
-  `issueDate` varchar(45) DEFAULT NULL,
-  `monthlyFee` varchar(45) DEFAULT NULL,
-  `duration` varchar(45) DEFAULT NULL,
+  `issueDate` datetime DEFAULT NULL,
+  `monthlyFee` int(11) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
   `idField` int(11) NOT NULL,
   `idFarmer` int(11) NOT NULL,
   PRIMARY KEY (`idField`,`idFarmer`),
   KEY `fk_farmer_idx` (`idFarmer`),
   CONSTRAINT `fk_farmer` FOREIGN KEY (`idFarmer`) REFERENCES `farmers` (`idfarmer`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_fields` FOREIGN KEY (`idField`) REFERENCES `fields` (`idfield`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 MAX_ROWS=1000000000;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `farmers` (
   UNIQUE KEY `id_UNIQUE` (`idFarmer`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `farmerscol_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 MAX_ROWS=1000000000;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `fields` (
   `size` int(11) NOT NULL,
   PRIMARY KEY (`idField`),
   UNIQUE KEY `id_UNIQUE` (`idField`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 MAX_ROWS=1000000000;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,4 +113,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-09 10:57:00
+-- Dump completed on 2019-11-10 15:51:21
