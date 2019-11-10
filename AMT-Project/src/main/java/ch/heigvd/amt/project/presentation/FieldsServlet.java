@@ -4,6 +4,7 @@ import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.project.model.Field;
 import ch.heigvd.amt.project.services.FieldManager;
 import ch.heigvd.amt.project.services.FieldManagerLocal;
+import ch.heigvd.amt.project.utils.Pagination;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -31,36 +32,19 @@ public class FieldsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int amount;
-        try {
-            amount = Integer.parseInt(request.getParameter("amount"));
-            if (amount < 1) {
-                amount = DEFAULT_AMOUNT;
-            }
-        } catch (NumberFormatException e) {
-            amount = DEFAULT_AMOUNT;
-        }
-
-        int page;
-
-        try {
-            page = Integer.parseInt(request.getParameter("page"));
-            if (page < 1) {
-                page = DEFAULT_PAGE;
-            }
-        } catch (NumberFormatException e) {
-            page = DEFAULT_PAGE;
-        }
+        Pagination pagination = new Pagination(
+                request.getParameter("amount"), request.getParameter("page"),
+                DEFAULT_AMOUNT, DEFAULT_PAGE);
 
         List<Field> fields = null;
         try {
-            fields = fieldManager.findAll(amount, page);
+            fields = fieldManager.findAll(pagination.getAmount(), pagination.getPage());
         } catch (SQLException e) {
             fields = new LinkedList<>();
         }
 
-        request.setAttribute("amount", amount);
-        request.setAttribute("page", page);
+        request.setAttribute("amount", pagination.getAmount());
+        request.setAttribute("page", pagination.getPage());
         request.setAttribute("fields", fields);
 
         response.setContentType("text/html;charset=UTF-8");
