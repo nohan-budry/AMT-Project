@@ -8,5 +8,5 @@ import java.util.List;
 
 @Local
 public interface FieldManagerLocal extends IDAO<String, Field> {
-    List<Field> findAll(int amount, int size) throws SQLException;
+    List<Field> findAll(int amount, int page) throws SQLException;
 }
