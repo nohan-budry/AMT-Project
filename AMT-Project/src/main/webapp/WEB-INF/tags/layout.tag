@@ -45,6 +45,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navigation-example-2">
             <ul class="nav navbar-nav navbar-right">
+                <%-- TODO: show rights and fields links only for admins --%>
                 <li>
                     <a href="rights" class="btn btn-simple">Manage Exploitation Rights</a>
                 </li>

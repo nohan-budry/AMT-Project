@@ -20,30 +20,7 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Farmer farmer = (Farmer) req.getSession().getAttribute("farmer");
-
-        if (farmer != null) {
-            req.setAttribute("farmer", farmer);
-            req.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(req, resp);
-
-<<<<<<< HEAD
-
-  @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    HttpSession session=req.getSession();
-    Farmer farmer=(Farmer)session.getAttribute("farmer");
-
-
-
-    if(farmer!=null){
-      req.setAttribute("farmer",farmer);
-      req.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(req, resp);
-    }else {
-      req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
-=======
-        } else {
-            req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
-        }
->>>>>>> a5854d7ecdec695e7ad57aff7ff4b98cb229d7ad
+        req.setAttribute("farmer", (Farmer) req.getSession().getAttribute("farmer"));
+        req.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(req, resp);
     }
 }
