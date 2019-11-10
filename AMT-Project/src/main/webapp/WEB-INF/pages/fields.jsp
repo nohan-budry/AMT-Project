@@ -40,7 +40,7 @@
                 </thead>
                 <tbody>
                 <c:choose>
-                    <c:when test="${!fields.isEmpty()}">
+                    <c:when test="${not empty fields}">
                         <c:forEach items="${fields}" var="field">
                             <tr>
                                 <form action="fields?page=${page}" method="post">
@@ -72,13 +72,13 @@
             <div class="row margin-top">
                 <div class="col-xs-4">
                     <c:if test="${page > 1}">
-                        <a href="fields?page=${page - 1}">Previous page</a>
+                        <a href="fields?page=${page - 1}&amount=${amount}">Previous page</a>
                     </c:if>
                 </div>
                 <div class="col-xs-4 text-center">${page}</div>
                 <div class="col-xs-4 text-right">
-                    <c:if test="${fields.size() >= amount}">
-                        <a href="fields?page=${page + 1}">Next page</a>
+                    <c:if test="${not empty fields && fields.size() >= amount}">
+                        <a href="fields?page=${page + 1}&amount=${amount}">Next page</a>
                     </c:if>
                 </div>
             </div>

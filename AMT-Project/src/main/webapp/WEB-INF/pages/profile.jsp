@@ -36,6 +36,62 @@
                 </div>
             </div>
         </div>
+        <div class="container margin-top">
+            <table id="example" class="table text-center">
+                <thead>
+                <tr>
+                    <th>Field ID</th>
+                    <th>Field Size</th>
+                    <th>Issue Date</th>
+                    <th>Duration</th>
+                    <th>Monthly Fee</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:choose>
+                    <c:when test="${not empty rights}">
+                        <c:forEach items="${rights}" var="right">
+                            <tr>
+                                <form action="rights?page=${page}" method="post">
+                                    <input type="hidden" name="idFarmer" value="${right.farmer.idFarmer}"/>
+                                    <input type="hidden" name="idField" value="${right.field.idField}"/>
+                                    <td>${right.field.idField}</td>
+                                    <td>${right.field.size}</td>
+                                    <td>
+                                        <input type="text" name="issueDate" value="${right.issueDate}"/>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="duration" value="${right.duration}"/>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="monthlyFee" value="${right.monthlyFee}"/>
+                                    </td>
+                                </form>
+                            </tr>
+                        </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                        <tr>
+                            <td colspan="5">No Data available</td>
+                        </tr>
+                    </c:otherwise>
+                </c:choose>
+                </tbody>
+            </table>
+            <div class="row margin-top">
+                <div class="col-xs-4">
+                    <c:if test="${page > 1}">
+                        <a href="profile?page=${page - 1}&amount=${amount}">Previous page</a>
+                    </c:if>
+                </div>
+                <div class="col-xs-4 text-center">${page}</div>
+                <div class="col-xs-4 text-right">
+                    <c:if test="${not empty rights && rights.size() >= amount}">
+                        <a href="profile?page=${page + 1}&amount=${amount}">Next page</a>
+                    </c:if>
+                </div>
+            </div>
+        </div>
     </jsp:body>
 </t:layout>
 
