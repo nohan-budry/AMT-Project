@@ -96,7 +96,7 @@ public class FarmersManager implements FarmersManagerLocal {
             if (!hasRecord) {
                 throw new KeyNotFoundException("Could not find user with username = " + username);
             }
-            Farmer existingUser = Farmer.builder()
+            Farmer existingFarmer = Farmer.builder()
                     .idFarmer(rs.getInt(1))
                     .username(rs.getString(2))
                     .firstName(rs.getString(3))
@@ -104,7 +104,7 @@ public class FarmersManager implements FarmersManagerLocal {
                     .address(rs.getString(5))
                     .email(rs.getString(6))
                     .build();
-            return existingUser;
+            return existingFarmer;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new Error(e);
@@ -144,20 +144,20 @@ public class FarmersManager implements FarmersManagerLocal {
     }
 
     @Override
-    public void update(Farmer entity) throws KeyNotFoundException {
+    public void update(Farmer farmer) throws KeyNotFoundException {
 
         Connection con = null;
         try {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement("UPDATE farmers SET firstName=?, lastName=?, address=?, email=? WHERE idFarmer = ?");
-            statement.setString(1, entity.getFirstName());
-            statement.setString(2, entity.getLastName());
-            statement.setString(3, entity.getAddress());
-            statement.setString(4, entity.getEmail());
-            statement.setInt(5, entity.getIdFarmer());
+            statement.setString(1, farmer.getFirstName());
+            statement.setString(2, farmer.getLastName());
+            statement.setString(3, farmer.getAddress());
+            statement.setString(4, farmer.getEmail());
+            statement.setInt(5, farmer.getIdFarmer());
             int numberOfUpdatedUsers = statement.executeUpdate();
             if (numberOfUpdatedUsers != 1) {
-                throw new KeyNotFoundException("Could not find user with username = " + entity.getUsername());
+                throw new KeyNotFoundException("Could not update");
             }
         } catch (SQLException e) {
             e.printStackTrace();
