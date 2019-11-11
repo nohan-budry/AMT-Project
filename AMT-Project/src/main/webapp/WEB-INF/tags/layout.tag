@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: nohanbudry
@@ -45,13 +46,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navigation-example-2">
             <ul class="nav navbar-nav navbar-right">
-                <%-- TODO: show rights and fields links only for admins --%>
-                <li>
-                    <a href="rights" class="btn btn-simple">Manage Exploitation Rights</a>
-                </li>
-                <li>
-                    <a href="fields" class="btn btn-simple">Manage Fields</a>
-                </li>
+                <c:if test="${farmer.isAdmin()}">
+                    <li>
+                        <a href="rights" class="btn btn-simple">Manage Exploitation Rights</a>
+                    </li>
+                    <li>
+                        <a href="fields" class="btn btn-simple">Manage Fields</a>
+                    </li>
+                </c:if>
                 <li>
                     <a href="profile" class="btn btn-simple">Profile</a>
                 </li>

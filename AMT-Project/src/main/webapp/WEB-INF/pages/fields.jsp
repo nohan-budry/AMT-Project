@@ -21,12 +21,10 @@
             <p class="alert alert-danger">${error}</p>
         </c:if>
         <div class="container margin-top">
-            <form action="fields?page=${page}" method="post">
+            <form action="fields?page=${page}&amount=${amount}" method="post">
                 <label for="newSize">Create a new field:</label>
                 <input id="newSize" type="number" min="0" name="size" placeholder="Size"/>
-                <button type="submit" class="btn btn-default" name="create">
-                    create
-                </button>
+                <button type="submit" class="btn btn-primary" name="create">create</button>
             </form>
         </div>
         <div class="container margin-top">

@@ -25,7 +25,6 @@ public class farmerManagerTest {
     @EJB
     FarmersManagerLocal farmersManager;
 
-
     @Test
     @Transactional(TransactionMode.ROLLBACK)
     public void itShouldBePossibleToCreateFarmer() throws SQLException {
@@ -40,7 +39,6 @@ public class farmerManagerTest {
         Farmer created = farmersManager.create(farmer);
         assertTrue(created != null);
     }
-
 
     @Test
     @Transactional(TransactionMode.ROLLBACK)
@@ -106,8 +104,5 @@ public class farmerManagerTest {
 
         assertEquals(farmerModified, farmerModifiedInDB);
         assertNotEquals(farmerCreated, farmerModifiedInDB);
-
     }
-
-
 }

@@ -52,21 +52,11 @@
                     <c:when test="${not empty rights}">
                         <c:forEach items="${rights}" var="right">
                             <tr>
-                                <form action="rights?page=${page}" method="post">
-                                    <input type="hidden" name="idFarmer" value="${right.farmer.idFarmer}"/>
-                                    <input type="hidden" name="idField" value="${right.field.idField}"/>
-                                    <td>${right.field.idField}</td>
-                                    <td>${right.field.size}</td>
-                                    <td>
-                                        <input type="text" name="issueDate" value="${right.issueDate}"/>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="duration" value="${right.duration}"/>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="monthlyFee" value="${right.monthlyFee}"/>
-                                    </td>
-                                </form>
+                                <td>${right.field.idField}</td>
+                                <td>${right.field.size}</td>
+                                <td>${right.issueDate}</td>
+                                <td>${right.duration}</td>
+                                <td>${right.monthlyFee}</td>
                             </tr>
                         </c:forEach>
                     </c:when>

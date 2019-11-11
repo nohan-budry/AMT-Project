@@ -53,6 +53,7 @@ public class FarmersManager implements FarmersManagerLocal {
                         .lastName(results.getString("lastName"))
                         .address(results.getString("address"))
                         .email(results.getString("email"))
+                        .admin(results.getBoolean("admin"))
                         .build());
             }
 
@@ -99,7 +100,7 @@ public class FarmersManager implements FarmersManagerLocal {
         try {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(
-                    "SELECT idFarmer, username, firstName, lastName, address ,email FROM farmers WHERE username = ?"
+                    "SELECT idFarmer, username, firstName, lastName, address ,email, admin FROM farmers WHERE username = ?"
             );
             statement.setString(1, username);
             ResultSet rs = statement.executeQuery();
@@ -114,6 +115,7 @@ public class FarmersManager implements FarmersManagerLocal {
                     .lastName(rs.getString(4))
                     .address(rs.getString(5))
                     .email(rs.getString(6))
+                    .admin(rs.getBoolean(7))
                     .build();
             return existingFarmer;
         } catch (SQLException e) {
@@ -130,7 +132,7 @@ public class FarmersManager implements FarmersManagerLocal {
         try {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(
-                    "SELECT idFarmer, username, firstName, lastName, address , email FROM farmers WHERE idFarmer = ?"
+                    "SELECT idFarmer, username, firstName, lastName, address , email, admin FROM farmers WHERE idFarmer = ?"
             );
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
@@ -145,6 +147,7 @@ public class FarmersManager implements FarmersManagerLocal {
                     .lastName(rs.getString(4))
                     .address(rs.getString(5))
                     .email(rs.getString(6))
+                    .admin(rs.getBoolean(7))
                     .build();
         } catch (SQLException e) {
             e.printStackTrace();

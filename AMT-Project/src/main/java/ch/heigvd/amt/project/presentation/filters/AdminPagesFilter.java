@@ -3,13 +3,13 @@ package ch.heigvd.amt.project.presentation.filters;
 import ch.heigvd.amt.project.model.Farmer;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//TODO: enable filter
-//@WebFilter(urlPatterns = {"/fields", "/rights"})
+@WebFilter(urlPatterns = {"/fields", "/rights"})
 public class AdminPagesFilter implements Filter {
 
     @Override
