@@ -1,0 +1,6 @@
+#!/bin/sh
+
+create-jdbc-connection-pool --restype javax.sql.DataSource --datasourceclassname com.mysql.cj.jdbc.MysqlDataSource --property 'user=root:password=adminadmin:url=jdbc\:mysql\://db\:3306/amt_project:useSSL=false' amt_project
+
+create-jdbc-resource --connectionpoolid amt_project jdbc/amt_project
+
