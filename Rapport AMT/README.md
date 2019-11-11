@@ -62,6 +62,8 @@ For the testing, we've implemented **Mockito** (*mocks* the different actions of
 
 
 
+By using Jmetter, we've quickly realised that by having more than 32 connection the system was full and after a few moments the system crush, giving us a % of error grater than 80%. In order to fix this, we went to the admin page of payara and change the pool settings.
+
 
 
 * In particular a detailed report about your **experiment** to answer the performance tests. We want a clear description of the experiment. We want numbers, graphs and explanations of what they mean.
