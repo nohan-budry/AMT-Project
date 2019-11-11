@@ -58,11 +58,11 @@ WebAPP: Contains all the pages (bootstrap, jsp, etc.)
 
 
 
-For the testing, we've implemented **Mockito** (*mocks* the different actions of our page) that allows the creation of test objects in automated unit test. We've used in order to test the servlets. **Arquillian** (used for Java middleware testing.) was also implemented (not to easy to set up with Payara), in order to test the different DAO (managers).
+For the testing, we've used **Mockito** (*mocks* the different actions of our page) that allows the creation of test objects in automated unit test. We've used it in order to test the servlets. **Arquillian** (used for Java middleware testing.) was also used (not to easy to set up with Payara), in order to test the different DAOs (managers).
 
 
 
-By using Jmetter, we've quickly realised that by having more than 32 connection the system was full and after a few moments the system crush, giving us a % of error grater than 80%. In order to fix this, we went to the admin page of payara and change the pool settings.
+By using Jmetter, we've quickly realised that by having more than 32 connection the system was full and after a few moments the system crashed, giving us a % of error grater than 80%. In order to fix this, we went to the admin page of payara and change the pool settings.
 
 
 
