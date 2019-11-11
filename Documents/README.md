@@ -70,4 +70,7 @@ By using Jmetter, we've quickly realised that by having more than 32 connection 
 
   
 
-* A list of **known bugs and limitations**.
+## Limitations
+
+- A farmer can't manage his own exploitation rights. It's only possible to do so by asking an admin.
+- It is impossible for a farmer to have multiple eploitation rights for the same field. This is due to how the database is designed
