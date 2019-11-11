@@ -2,6 +2,7 @@ package ch.heigvd.amt.project.presentation;
 
 import ch.heigvd.amt.project.model.Field;
 import ch.heigvd.amt.project.services.FieldManagerLocal;
+import ch.heigvd.amt.project.utils.Pagination;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -38,14 +39,14 @@ public class FieldsServletTest extends ServletTest {
 
         when(request.getParameter("amount")).thenReturn("25");
         when(request.getParameter("page")).thenReturn("1");
-        when(fieldManager.findAll(25, 1)).thenReturn(fields);
+        when(fieldManager.findAll(any())).thenReturn(fields);
 
         servlet.doGet(request, response);
 
         verify(request).getParameter("amount");
         verify(request).getParameter("page");
 
-        verify(fieldManager).findAll(25, 1);
+        verify(fieldManager).findAll(any());
 
         verify(request).setAttribute("amount", 25);
         verify(request).setAttribute("page", 1);

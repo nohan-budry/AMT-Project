@@ -5,9 +5,9 @@ public class Pagination {
     private int amount;
     private int page;
 
-    public Pagination(int amount, int page, int defaultAmount, int defaultPage) {
-        this.amount = checkValue(amount, defaultAmount);
-        this.page = checkValue(page, defaultPage);
+    public Pagination(int amount, int page) {
+        this.amount = checkValue(amount, 10);
+        this.page = checkValue(page, 1);
     }
 
     public Pagination(String amount, String page, int defaultAmount, int defaultPage) {

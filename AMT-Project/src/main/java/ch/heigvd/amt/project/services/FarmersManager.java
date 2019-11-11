@@ -3,6 +3,8 @@ package ch.heigvd.amt.project.services;
 import ch.heigvd.amt.project.authentication.IAuthenticationService;
 import ch.heigvd.amt.project.datastore.exceptions.KeyNotFoundException;
 import ch.heigvd.amt.project.model.Farmer;
+import ch.heigvd.amt.project.model.Field;
+import ch.heigvd.amt.project.utils.Pagination;
 
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -13,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,34 +32,36 @@ public class FarmersManager implements FarmersManagerLocal {
     IAuthenticationService authenticationService;
 
     @Override
-    public List<Farmer> findAll() {
-        List<Farmer> farmers = new ArrayList<>();
+    public List<Farmer> findAll(Pagination pagination) {
+        List<Farmer> farmers = new LinkedList<>();
         Connection connection = null;
         try {
             connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM farmers LIMIT ?, ?"
+            );
 
-            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM farmers");
-            ResultSet rs = pstmt.executeQuery();
+            statement.setInt(1, pagination.getOffset());
+            statement.setInt(2, pagination.getAmount());
 
-            while (rs.next()) {
-
+            ResultSet results = statement.executeQuery();
+            while (results.next()) {
                 farmers.add(Farmer.builder()
-                        .idFarmer(rs.getInt("idFarmer"))
-                        .username(rs.getString("username"))
-                        .firstName(rs.getString("firstName"))
-                        .lastName(rs.getString("lastName"))
-                        .address(rs.getString("address"))
-                        .email(rs.getString("email"))
+                        .idFarmer(results.getInt("idFarmer"))
+                        .username(results.getString("username"))
+                        .firstName(results.getString("firstName"))
+                        .lastName(results.getString("lastName"))
+                        .address(results.getString("address"))
+                        .email(results.getString("email"))
                         .build());
-
             }
 
-            connection.close();
-
-
-        } catch (SQLException e) {
-            Logger.getLogger(FarmersManager.class.getName()).log(Level.SEVERE, null, e);
+        } catch (SQLException sqlException) {
+            farmers.clear();
+        } finally {
+            closeConnection(connection);
         }
+
         return farmers;
     }
 
@@ -66,8 +71,8 @@ public class FarmersManager implements FarmersManagerLocal {
         try {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(
-                    "INSERT INTO farmers ( username,firstName, lastName,address ,email, password) VALUES ( ?,?, ?, ?, ?,?)"
-            );
+                    "INSERT INTO farmers ( username,firstName, lastName,address ,email, password) VALUES ( ?,?, ?, ?, ?,?)",
+                    PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, entity.getUsername());
             statement.setString(2, entity.getFirstName());
             statement.setString(3, entity.getLastName());
@@ -75,11 +80,17 @@ public class FarmersManager implements FarmersManagerLocal {
             statement.setString(5, entity.getEmail());
             statement.setString(6, authenticationService.hashPassword(entity.getPassword()));
             statement.execute();
-            return entity;
+
+            ResultSet keys = statement.getGeneratedKeys();
+            if (keys.next()) {
+                return entity.toBuilder().idFarmer(keys.getInt(1)).build();
+            }
+
         } finally {
-            if (con != null)
-                closeConnection(con);
+            closeConnection(con);
         }
+
+        return null;
     }
 
     @Override
@@ -114,14 +125,14 @@ public class FarmersManager implements FarmersManagerLocal {
     }
 
     @Override
-    public Farmer findById(String id) throws KeyNotFoundException {
+    public Farmer findById(Integer id) throws KeyNotFoundException {
         Connection con = null;
         try {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(
                     "SELECT idFarmer, username, firstName, lastName, address , email FROM farmers WHERE idFarmer = ?"
             );
-            statement.setInt(1, Integer.parseInt(id));
+            statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
             if (!hasRecord) {
@@ -169,12 +180,12 @@ public class FarmersManager implements FarmersManagerLocal {
     }
 
     @Override
-    public void deleteById(String id) throws KeyNotFoundException {
+    public void deleteById(Integer id) throws KeyNotFoundException {
         Connection con = null;
         try {
             con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement("DELETE FROM farmers WHERE idFarmer = ?");
-            statement.setInt(1, Integer.parseInt(id));
+            statement.setInt(1, id);
             int numberOfDeletedUsers = statement.executeUpdate();
             if (numberOfDeletedUsers != 1) {
                 throw new KeyNotFoundException("Could not find user with username = " + id);
@@ -215,10 +226,12 @@ public class FarmersManager implements FarmersManagerLocal {
     }
 
     private void closeConnection(Connection connection) {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

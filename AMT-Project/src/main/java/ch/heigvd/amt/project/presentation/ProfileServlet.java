@@ -30,15 +30,8 @@ public class ProfileServlet extends HttpServlet {
                 req.getParameter("amount"), req.getParameter("page"),
                 25, 1);
 
-        List<ExploitationRight> rights = null;
-        try {
-             rights = rightsManager.findAllForFarmer(farmer, pagination);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         req.setAttribute("farmer", farmer);
-        req.setAttribute("rights", rights);
+        req.setAttribute("rights", rightsManager.findAllForFarmer(farmer, pagination));
         req.setAttribute("amount", pagination.getAmount());
         req.setAttribute("page", pagination.getPage());
         req.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(req, resp);

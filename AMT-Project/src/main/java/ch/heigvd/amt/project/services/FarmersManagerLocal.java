@@ -6,7 +6,7 @@ import ch.heigvd.amt.project.model.Farmer;
 import javax.ejb.Local;
 
 @Local
-public interface FarmersManagerLocal extends IDAO<String, Farmer> {
+public interface FarmersManagerLocal extends IDAO<Integer, Farmer> {
     Farmer findByUser(String username) throws KeyNotFoundException;
     Farmer login(String username, String password);
 }

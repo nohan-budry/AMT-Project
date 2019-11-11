@@ -36,16 +36,9 @@ public class FieldsServlet extends HttpServlet {
                 request.getParameter("amount"), request.getParameter("page"),
                 DEFAULT_AMOUNT, DEFAULT_PAGE);
 
-        List<Field> fields = null;
-        try {
-            fields = fieldManager.findAll(pagination.getAmount(), pagination.getPage());
-        } catch (SQLException e) {
-            fields = new LinkedList<>();
-        }
-
         request.setAttribute("amount", pagination.getAmount());
         request.setAttribute("page", pagination.getPage());
-        request.setAttribute("fields", fields);
+        request.setAttribute("fields", fieldManager.findAll(pagination));
 
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("/WEB-INF/pages/fields.jsp").forward(request, response);
@@ -79,9 +72,9 @@ public class FieldsServlet extends HttpServlet {
 
         } else if (request.getParameterMap().containsKey("delete")) {
             try {
-                fieldManager.deleteById(request.getParameter("id"));
+                fieldManager.deleteById(Integer.parseInt(request.getParameter("id")));
                 request.setAttribute("success", "Field deleted");
-            } catch (KeyNotFoundException e) {
+            } catch (KeyNotFoundException | NumberFormatException e) {
                 request.setAttribute("error", "Deletion failed!");
             }
         }

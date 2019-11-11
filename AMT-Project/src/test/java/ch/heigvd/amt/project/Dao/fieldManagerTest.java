@@ -23,49 +23,34 @@ import static org.junit.Assert.*;
 @DeploymentParameters(testable = true)
 public class fieldManagerTest {
 
-  @EJB
-  FieldManagerLocal fieldManager;
+    @EJB
+    FieldManagerLocal fieldManager;
 
 
-  @Test
-  @Transactional(TransactionMode.ROLLBACK)
-  public void itShouldBePossibleToCreateField()throws  SQLException  {
+    @Test
+    @Transactional(TransactionMode.ROLLBACK)
+    public void itShouldBePossibleToCreateField() throws SQLException {
 
-    Field field= Field.builder()
-            .size(35)
-            .build();
+        Field field = Field.builder()
+                .size(35)
+                .build();
 
-    fieldManager.create(field);
-  }
-
-
-  @Test
-  @Transactional(TransactionMode.ROLLBACK)
-  public void itShouldBePossibleToCreateAndRetrieveAFieldViaTheFarmerDAO() throws  KeyNotFoundException, SQLException {
-    Field field= Field.builder()
-            .size(35)
-            .build();
-
-//    Field fieldCreated=fieldManager.create(field);
-//    assertEquals(fieldCreated.getIdField(),0);
-//    fieldManager.findById(String.valueOf(fieldCreated.getIdField()));
-    //Field fieldLoaded=fieldManager.findById(String.valueOf(fieldCreated.getIdField()));
-    //assertEquals(fieldCreated.getIdField(),fieldLoaded.getIdField());
-
-//    Farmer farmerLoaded=Farmer.builder().username(farmerLoadedWithId.getUsername())
-//            .firstName(farmerLoadedWithId.getFirstName())
-//            .lastName(farmerLoadedWithId.getLastName())
-//            .address(farmerLoadedWithId.getAddress())
-//            .email(farmerLoadedWithId.getEmail())
-//            .build();
-
-//    assertEquals(field, fieldCreated);
-//    assertEquals(field, fieldLoaded);
-//    assertSame(field, fieldCreated);
-//    assertNotSame(field, fieldLoaded);
+        fieldManager.create(field);
+    }
 
 
-  }
+    @Test
+    @Transactional(TransactionMode.ROLLBACK)
+    public void itShouldBePossibleToCreateAndRetrieveAFieldViaTheFarmerDAO() throws KeyNotFoundException, SQLException {
+        Field field = Field.builder()
+                .size(35)
+                .build();
+
+        Field fieldCreated = fieldManager.create(field);
+        Field fieldLoaded = fieldManager.findById(fieldCreated.getIdField());
+
+        assertEquals(fieldCreated.getIdField(), fieldLoaded.getIdField());
+    }
 //
 //  @Test
 //  @Transactional(TransactionMode.ROLLBACK)
