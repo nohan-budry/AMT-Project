@@ -30,5 +30,44 @@ In order to access the `commercial` infrastructure, the **StartComertial.sh** sc
 
 
 
-More info regarding the project, inside the rapport folder.
+Once the application has been deployed, the login/registration page will be at:
+
+
+```
+http://localhost:8080/AMT-Project/login
+```
+
+
+
+|   TYPE   |  USERNAME    | PASSWORD     |
+| ---- | ---- | ---- |
+|    ADMIN  |    jack  |    123  |
+|    REGULAR  |   steve   |    123  |
+
+
+
+**Different routes:**
+
+| Route         | Functionality |
+| ------------- | ------------ |
+| /login        | Login        |
+| /registration | Registration |
+| /rights 			| Managing the Exploitation Rights |
+| /fields			  | Managing fields |
+| /logout			  | Logout account |
+| /profile      | User main page |
+
+
+
+
+
+
+
+
+
+
+
+
+
+More info regarding the project, inside the document  folder.
 
