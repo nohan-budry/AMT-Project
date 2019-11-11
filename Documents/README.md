@@ -76,6 +76,7 @@ Arquillian test, are executed remotely. That's the reason why we cant have a cal
 
 ## Limitations
 
+- In the profile, a farmer can't modify his informations (email, addres, etc.) himself.
 - A farmer can't manage his own exploitation rights. It's only possible to do so by asking an admin.
 - It is impossible for a farmer to have multiple eploitation rights for the same field. This is due to how the database is designed.
 
