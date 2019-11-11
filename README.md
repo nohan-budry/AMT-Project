@@ -57,6 +57,9 @@ http://localhost:8080/AMT-Project/login
 | /logout			  | Logout account |
 | /profile      | User main page |
 
+| PHPMyAdmin | USERNAME | PASSWORD   |
+| ---------- | -------- | ---------- |
+|            | root     | adminadmin |
 
 
 
