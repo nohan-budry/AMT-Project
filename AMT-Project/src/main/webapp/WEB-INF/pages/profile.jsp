@@ -30,7 +30,6 @@
                             <c:if test="${not empty farmer.address}">
                                 <p>Address: ${farmer.address}</p>
                             </c:if>
-                            <btn class="btn"><i class="fa fa-cog"></i> Settings</btn>
                         </div>
                     </div>
                 </div>

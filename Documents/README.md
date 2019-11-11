@@ -73,3 +73,9 @@ We've executed all test with coverage, obtaining the following result:
 Arquillian test, are executed remotely. That's the reason why we cant have a calculated coverage at inteliji.
 
 
+
+## Limitations
+
+- A farmer can't manage his own exploitation rights. It's only possible to do so by asking an admin.
+- It is impossible for a farmer to have multiple eploitation rights for the same field. This is due to how the database is designed
+
