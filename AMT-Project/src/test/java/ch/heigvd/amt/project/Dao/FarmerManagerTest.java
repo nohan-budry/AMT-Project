@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 @RunWith(Arquillian.class)
 @MavenBuild
 @DeploymentParameters(testable = true)
-public class farmerManagerTest {
+public class FarmerManagerTest {
 
     @EJB
     FarmersManagerLocal farmersManager;
