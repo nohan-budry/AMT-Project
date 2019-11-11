@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/login", "/logout", "/registration"})
+@WebFilter(urlPatterns = {"/login", "/registration"})
 public class DisconnectedPagesFilter implements Filter {
 
     @Override

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/profile", "/fields", "/rights"})
+@WebFilter(urlPatterns = {"/profile", "/fields", "/rights", "/logout"})
 public class ConnectedPagesFilter implements Filter {
 
     @Override
