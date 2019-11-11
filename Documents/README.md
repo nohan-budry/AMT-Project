@@ -66,8 +66,10 @@ By using Jmetter, we've quickly realised that by having more than 32 connection 
 
 
 
-* In particular a detailed report about your **experiment** to answer the performance tests. We want a clear description of the experiment. We want numbers, graphs and explanations of what they mean.
+We've executed all test with coverage, obtaining the following result:
 
-  
+![TestCoverage](images/TestCoverage.jpeg)
 
-* A list of **known bugs and limitations**.
+Arquillian test, are executed remotely. That's the reason why we cant have a calculated coverage at inteliji.
+
+
