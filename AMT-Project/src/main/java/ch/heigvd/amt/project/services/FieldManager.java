@@ -96,6 +96,7 @@ public class FieldManager implements FieldManagerLocal {
             PreparedStatement statement = con.prepareStatement("INSERT INTO fields (size) VALUES ( ?)");
             statement.setLong(1, entity.getSize());
             statement.execute();
+
             return entity;
         } finally {
             closeConnection(con);
@@ -112,7 +113,7 @@ public class FieldManager implements FieldManagerLocal {
             ResultSet rs = statement.executeQuery();
             boolean hasRecord = rs.next();
             if (!hasRecord) {
-                throw new KeyNotFoundException("Could not find user with field = " + id);
+                throw new KeyNotFoundException("Could not find field = " + id);
             }
             Field existingUser = Field.builder()
                     .size(rs.getInt(1))

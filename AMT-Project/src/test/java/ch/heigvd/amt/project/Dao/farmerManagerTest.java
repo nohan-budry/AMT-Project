@@ -26,28 +26,29 @@ public class farmerManagerTest {
 
   @Test
   @Transactional(TransactionMode.ROLLBACK)
-  public void itShouldBePossibleToCreateFarmer()throws DuplicateKeyException, SQLException  {
+  public void itShouldBePossibleToCreateFarmer()throws  SQLException  {
 
     Farmer farmer= Farmer.builder().username("AndyMister")
-            .firstName("andy")
-            .lastName("doUevenArquillian")
-            .address("javaland")
-            .email("toto@mimi.como")
+            .firstName("Andy")
+            .lastName("Moreno")
+            .address("Javaland")
+            .email("toto@mimi.com")
             .build();
 
-  farmersManager.create(farmer);
+  Farmer created=farmersManager.create(farmer);
+  assertTrue(created!=null);
 
   }
 
 
   @Test
   @Transactional(TransactionMode.ROLLBACK)
-  public void itShouldBePossibleToCreateAndRetrieveAFarmerViaTheFarmerDAO() throws DuplicateKeyException, KeyNotFoundException, SQLException {
+  public void itShouldBePossibleToCreateAndRetrieveAFarmerViaTheFarmerDAO() throws  KeyNotFoundException, SQLException {
     Farmer farmer= Farmer.builder().username("AndyMister")
-            .firstName("andy")
-            .lastName("doUevenArquillian")
-            .address("javaland")
-            .email("toto@mimi.como")
+            .firstName("Andy")
+            .lastName("Moreno")
+            .address("Javaland")
+            .email("toto@mimi.com")
             .build();
 
     Farmer farmerCreated=farmersManager.create(farmer);
@@ -69,12 +70,12 @@ public class farmerManagerTest {
 
   @Test
   @Transactional(TransactionMode.ROLLBACK)
-  public void itShouldBePossibleToDeleteAFarmer() throws DuplicateKeyException, KeyNotFoundException, SQLException {
+  public void itShouldBePossibleToDeleteAFarmer() throws  KeyNotFoundException, SQLException {
     Farmer farmer= Farmer.builder().username("AndyMister")
-            .firstName("andy")
-            .lastName("doUevenArquillian")
-            .address("javaland")
-            .email("toto@mimi.como")
+            .firstName("Andy")
+            .lastName("Moreno")
+            .address("Javaland")
+            .email("toto@mimi.com")
             .build();
 
     Farmer farmerCreated=farmersManager.create(farmer);
@@ -93,24 +94,17 @@ public class farmerManagerTest {
 
   @Test
   @Transactional(TransactionMode.ROLLBACK)
-  public void itShouldBePossibleToUpdateAFarmer() throws DuplicateKeyException, KeyNotFoundException, SQLException {
+  public void itShouldBePossibleToUpdateAFarmer() throws  KeyNotFoundException, SQLException {
     Farmer farmer= Farmer.builder().username("AndyMister")
-            .firstName("andy")
-            .lastName("doUevenArquillian")
-            .address("javaland")
-            .email("toto@mimi.como")
+            .firstName("Andy")
+            .lastName("Moreno")
+            .address("Javaland")
+            .email("toto@mimi.com")
             .build();
 
     farmersManager.create(farmer);
     Farmer farmerCreated=farmersManager.findByUser(farmer.getUsername());
-    Farmer farmerModified=Farmer.builder()
-            .idFarmer(farmerCreated.getIdFarmer())
-            .username(farmerCreated.getUsername())
-            .firstName("Jack")
-            .lastName("Erian")
-            .address(farmerCreated.getAddress())
-            .email(farmerCreated.getEmail())
-            .build();
+    Farmer farmerModified=farmerCreated.toBuilder().firstName("Jack").lastName("Londra").build();;
 
    farmersManager.update(farmerModified);
 
